@@ -1,0 +1,40 @@
+const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const DotenvWebpack = require('dotenv-webpack');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'public/dist'),
+    filename: '[name].[hash].js',
+    chunkFilename: '[name].[contentHash].js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+    ],
+  },
+  plugins: [
+    new DotenvWebpack(),
+    new CleanWebpackPlugin(),
+    new HTMLWebpackPlugin({
+      template: path.resolve(__dirname, 'src/index.html'),
+    }),
+  ],
+  devServer: {
+    index: path.resolve(__dirname, 'public/dist/index.html'),
+    contentBase: path.join(__dirname, 'public/dist'),
+    hot: true,
+    port: 3004,
+    writeToDisk: true,
+  },
+};
