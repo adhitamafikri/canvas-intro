@@ -8,6 +8,7 @@ function initCanvasProgram(canvas) {
   const ctx = canvas.getContext('2d');
   drawRectangles(ctx);
   drawSmiley(ctx);
+  drawTriangles(ctx);
 }
 
 /**
@@ -50,8 +51,24 @@ function drawSmiley(ctx) {
   ctx.moveTo(200, 40);
   ctx.arc(195, 40, 5, Math.PI * 2, false);
 
+  ctx.fillStyle = 'palevioletred';
+  ctx.fill();
+
   ctx.stroke();
   ctx.closePath();
+}
+
+/**
+ * @param {CanvasRenderingContext2D} ctx
+ */
+function drawTriangles(ctx) {
+  // Colored triangle
+  ctx.beginPath();
+  ctx.moveTo(260, 10);
+  ctx.lineTo(350, 10);
+  ctx.lineTo(260, 100);
+  ctx.fillStyle = 'green';
+  ctx.fill();
 }
 
 export { initCanvasProgram };
