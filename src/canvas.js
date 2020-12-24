@@ -9,6 +9,8 @@ function initCanvasProgram(canvas) {
   drawRectangles(ctx);
   drawSmiley(ctx);
   drawTriangles(ctx);
+  drawCircles(ctx);
+  drawWithPath2D(ctx);
 }
 
 /**
@@ -69,6 +71,50 @@ function drawTriangles(ctx) {
   ctx.lineTo(260, 100);
   ctx.fillStyle = 'green';
   ctx.fill();
+
+  // Stroked Path
+  ctx.beginPath();
+  ctx.moveTo(280, 100);
+  ctx.lineTo(360, 100);
+  ctx.lineTo(360, 10);
+  ctx.closePath();
+  ctx.stroke();
+}
+
+/**
+ * @param {CanvasRenderingContext2D} ctx
+ */
+function drawCircles(ctx) {
+  // Colored triangle
+  ctx.beginPath();
+  ctx.moveTo(260, 10);
+  ctx.lineTo(350, 10);
+  ctx.lineTo(260, 100);
+  ctx.fillStyle = 'green';
+  ctx.fill();
+
+  // Stroked Path
+  ctx.beginPath();
+  ctx.moveTo(280, 100);
+  ctx.lineTo(360, 100);
+  ctx.lineTo(360, 10);
+  ctx.closePath();
+  ctx.stroke();
+}
+
+/**\
+ * This is experimental feature. Use in dev only
+ * @param {CanvasRenderingContext2D} ctx
+ */
+function drawWithPath2D(ctx) {
+  const rectangle = new Path2D();
+  rectangle.rect(400, 10, 100, 100);
+
+  const circle = new Path2D();
+  circle.arc(580, 60, 50, 0, Math.PI * 2);
+
+  ctx.stroke(rectangle);
+  ctx.fill(circle);
 }
 
 export { initCanvasProgram };
